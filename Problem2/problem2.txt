@@ -1,0 +1,105 @@
+------------------------ Section A -------------------------
+
+Q1. Find the number of instructors who have never taught any course. If the result of your query is empty, add the appropriate data (and include corresponding insert statements) to ensure the result is not empty.NOTE:  IN THE SUBMISSION  FILE, PASTE  DATA INSERTED BELOW THIS STATEMENT AS A REMARK.
+ANS : select count(instructor.name) from instructor where instructor.ID not in (select ID from teaches);
+
++------------------------+
+| count(instructor.name) |
++------------------------+
+|                      3 |
++------------------------+
+
+Note : As per the result of the query 3 instructors have never taught any course so no need to add any data.
+
+
+Q2. Find the total capacity of every building in the university.
+ANS : select classroom.building, sum(classroom.capacity) from classroom group by classroom.building;
+
++----------+-------------------------+
+| building | sum(classroom.capacity) |
++----------+-------------------------+
+| Packard  |                     500 |
+| Painter  |                      10 |
+| Taylor   |                      70 |
+| Watson   |                      80 |
++----------+-------------------------+
+
+Q3. Find all departments that have at least one instructor, and list the names of the departments along with the number of instructors; order the result in descending order of number of instructors. 
+ANS : select instructor.dept_name, count(instructor.dept_name) from instructor group by dept_name order by count(instructor.dept_name) DESC;
+
++------------+-----------------------------+
+| dept_name  | count(instructor.dept_name) |
++------------+-----------------------------+
+| Comp. Sci. |                           3 |
+| Finance    |                           2 |
+| History    |                           2 |
+| Physics    |                           2 |
+| Biology    |                           1 |
+| Elec. Eng. |                           1 |
+| Music      |                           1 |
++------------+-----------------------------+
+
+Q4. For each student, compute the total credits they have successfully completed, i.e. total credits of courses they have taken, for which they have a non-null grade other than 'F'. Do NOT use the tot_creids attribute of student.
+ANS : select student.name, sum(course.credits) from student inner join takes on takes.ID=student.ID inner join course on course.course_id=takes.course_id where takes.grade!='F' group by student.name;
+
++----------+---------------------+
+| name     | sum(course.credits) |
++----------+---------------------+
+| Tanaka   |                   4 |
+| Zhang    |                   7 |
+| Shankar  |                  14 |
+| Williams |                   8 |
+| Brown    |                   7 |
+| Bourikas |                   7 |
+| Levy     |                   7 |
+| Aoi      |                   3 |
+| Chavez   |                   3 |
+| Brandt   |                   3 |
+| Sanchez  |                   3 |
+| Peltier  |                   4 |
++----------+---------------------+
+
+
+----------------------------------- Section B ---------------------------------
+
+Q1. Find the id and title of all courses which do not require any  prerequisites.
+ANS : select course.course_id, course.title from course where course_id not in (select course_id from prereq);
+
++-----------+----------------------------+
+| course_id | title                      |
++-----------+----------------------------+
+| BIO-101   | Intro. to Biology          |
+| CS-101    | Intro. to Computer Science |
+| FIN-201   | Investment Banking         |
+| HIS-351   | World History              |
+| MU-199    | Music Video Production     |
+| PHY-101   | Physical Principles        |
++-----------+----------------------------+
+
+Q2. Find the names of students who have not taken any biology dept. courses.
+ANS : select student.name, course.title from student inner join takes on student.ID=takes.ID inner join course on takes.course_id=course.course_id where course.dept_name != 'Biology';
+
++----------+----------------------------+
+| name     | title                      |
++----------+----------------------------+
+| Zhang    | Intro. to Computer Science |
+| Shankar  | Intro. to Computer Science |
+| Levy     | Intro. to Computer Science |
+| Williams | Intro. to Computer Science |
+| Brown    | Intro. to Computer Science |
+| Bourikas | Intro. to Computer Science |
+| Levy     | Intro. to Computer Science |
+| Shankar  | Game Design                |
+| Williams | Game Design                |
+| Shankar  | Robotics                   |
+| Bourikas | Robotics                   |
+| Levy     | Image Processing           |
+| Brown    | Image Processing           |
+| Zhang    | Database System Concepts   |
+| Shankar  | Database System Concepts   |
+| Aoi      | Intro. to Digital Systems  |
+| Chavez   | Investment Banking         |
+| Brandt   | World History              |
+| Sanchez  | Music Video Production     |
+| Peltier  | Physical Principles        |
++----------+----------------------------+
