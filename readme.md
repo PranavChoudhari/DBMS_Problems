@@ -10,13 +10,15 @@ This repository contains DBMS Problems
 ## ⚙️ Completed Problems
 1. Problem 1
 2. Problem 2
+3. Problem 4
 
 ## 🌟 To Contribute
 1. Problem 3
-2. Problem 4
+
 
 
 ## 🤖 Contributers
 [mr-pranavchoudhari](https://github.com/PranavChoudhari)
 [mr-shitij](https://github.com/mr-shitij)
+[mr-sanskarjamadar](https://github.com/sanskarjamadar)
 
